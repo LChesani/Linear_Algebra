@@ -1,28 +1,47 @@
 import ches_math as cm;
 
+def ceil(x):
+    y = round(x);
+    if x > y:
+        y = y+1;
+    return y;
 
-def sub_vet(v1, v2):
-    x = [0 for _ in range(0, len(v1))]
-    for i in range(0, len(v1)):
-        x[i] = v2[i] - v1[i];
-    return x;
+def modulo(x):
+    if x < 0:
+        return 0-x;
+    else:
+        return x;
+
+def gcd(l):
+    x = modulo(min(l));
+    mdc = 1;
+    for i in range(1, ceil(x+1)):
+        r = True;
+        for j in l:
+            if j % i != 0:
+                r = False;
+        if r == True:
+            mdc = i;
+    return mdc;
+
+
+
+
 
 def solve(a, b):
     return b/a;
 
 
-def linha_multiplica(l, mult):
-    for i in range(0, len(l)):
-        l[i] = l[i] * mult;
-    return l;
+
 
 def gauss(A):
-    pivot = float();
     mult = float();
     for i in range(0, len(A)):
-        pivot = A[i][i];
         for j in range(i+1, len(A)):
-            mult = solve(A[j][i], A[i][i]);
-            A[j] = sub_vet(linha_multiplica(A[i], mult), A[j]);
+            if A[i][i] != 0: 
+                mult = solve(A[i][i], A[j][i]);
+            A[j] = cm.sub_vet(cm.linha_multiplica(A[i], mult), A[j]);        
+            mdc = gcd(A[j]);
+            A[j] = cm.linha_multiplica(A[j], (1/mdc));
     return A;
             

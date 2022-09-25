@@ -1,5 +1,5 @@
 import numpy as np;
-
+import random;
 
 def aloca_matriz(m, n):
     A = [[0 for _ in range(0, n)] for _ in range(0, m)];
@@ -9,7 +9,7 @@ def entrada_matriz(m, n):
     A = [[0 for _ in range(0, n)] for _ in range(0, m)]; #"malloca" tamanho da matriz A
     for i in range(0, m):
         for j in range(0, n):
-            A[i][j] = float(input("A" + str(i) + str(j) + ' '));
+            A[i][j] = float(input());
     return A;
 
 def entrada_solucao(m):
@@ -22,9 +22,50 @@ def vetor_resultado(m):
     x = m * [0];
     return x;
 
+def sub_vet(v1, v2):
+    x = [0 for _ in range(0, len(v1))]
+    for i in range(0, len(v1)):
+        x[i] = v2[i] - v1[i];
+    return x;
 
 def printa_matriz(A):
-    print('[', end=' ');
+    print('[');
     for i in range(0, len(A)):
-        print(A[i], end=' ');
+        print(A[i]);
     print(']');
+    
+    
+def matriz_identidade(m):
+    A = aloca_matriz(m, m);
+    for i in range(0, m):
+        A[i][i] = 1;
+    return A;    
+
+def linha_multiplica(l, mult):
+    for i in range(0, len(l)):
+        l[i] = l[i] * mult;
+    return l;
+
+def gera_matriz(m, n):
+    A = matriz_identidade(m);
+    
+    for i in range(0, 27):
+        r = random.randint(0, m-1);
+        A[r] = linha_multiplica(A[r], random.randint(-3, 3));
+        l1 = 0;
+        l2 = 0;
+        while l1 == l2:
+            l1 = random.randint(0, m-1);
+            l2 = random.randint(0, m-1);
+        A[l1] = sub_vet(A[l1], A[l2]);
+    return A;
+
+def split_matriz_solucao(A):
+    b = [x[len(A[0])-1] for x in A];
+    
+    a = [[0 for _ in range(0, len(A[0])-1)] for _ in range(0, len(A))];
+    
+    for i in range(0, len(A)):
+        for j in range(0, len(A[i])-1):
+            a[i][j] = A[i][j];
+    return a, b;

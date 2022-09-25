@@ -12,14 +12,18 @@ n = int(input());
 
 A = cm.entrada_matriz(m, n);
 
-#b = cm.entrada_solucao(m);
+A = gauss(A);
 
-#x = sr(A, b, m);
+B, b = cm.split_matriz_solucao(A);
 
-B = gauss(A);
 
-cm.printa_matriz(B);
-#B = gauss.gauss(A);
+
+x = sr(B, b, m);
+
+
+
+
+cm.printa_matriz(x);
 
 
         
