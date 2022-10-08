@@ -2,15 +2,10 @@ import ches_math as cm;
 
 def ceil(x):
     y = round(x);
-    if x > y:
-        y = y+1;
-    return y;
+    return y+1 if x > y else y;
 
 def modulo(x):
-    if x < 0:
-        return 0-x;
-    else:
-        return x;
+    return 0-x if x < 0 else x;
 
 def gcd(l):
     x = modulo(min(l));
