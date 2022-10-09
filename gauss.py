@@ -29,7 +29,7 @@ def solve(a, b):
 
 
 
-def gauss(A):
+def solve(A):
     mult = float();
     for i in range(0, len(A)):
         for j in range(i+1, len(A)):

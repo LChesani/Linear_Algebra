@@ -1,8 +1,8 @@
 import ches_math as cm;
-from gauss import gauss;
+from gauss import solve;
 from substituicao_retroativa import op as sr;
 from substituicao_sucessiva import op as ss;
-
+import decomposicao_lu as lu;
 
 
 
@@ -12,18 +12,16 @@ n = int(input());
 
 A = cm.entrada_matriz(m, n);
 
-A = gauss(A);
-
-B, b = cm.split_matriz_solucao(A);
-
-
-
-x = sr(B, b, m);
+L, U = lu.solve(A);
 
 
 
 
-cm.printa_matriz(x);
 
 
+cm.printa_matriz(L);
+cm.printa_matriz(U);
+
+C = cm.multiplica(L, U);
+cm.printa_matriz(C);
         

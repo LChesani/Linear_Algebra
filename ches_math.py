@@ -1,4 +1,3 @@
-import numpy as np;
 import random;
 
 def aloca_matriz(m, n):
@@ -69,3 +68,11 @@ def split_matriz_solucao(A):
         for j in range(0, len(A[i])-1):
             a[i][j] = A[i][j];
     return a, b;
+
+def multiplica(A, B):
+    C = aloca_matriz(len(A), len(B[0]));
+    for i in range(0, len(C)):
+        for j in range(0, len(C[0])):
+            for k in range(0, len(A[0])):
+                C[i][j] += (A[i][k] * B[k][j]);
+    return C;
