@@ -3,25 +3,34 @@ from gauss import solve;
 from substituicao_retroativa import op as sr;
 from substituicao_sucessiva import op as ss;
 import decomposicao_lu as lu;
+import cholesky as cl;
+
+A = [
+        [8, 28.27, 125.24, 1341],
+        [28.27, 125.84, 627.88, 4823.92],
+        [125.24, 627.88, 3337.38, 21286.27]
+    ];
+
+
+
+LL, det, erro = cl.solve(A); #Cholesky
+
+cl.refine(LL); #remove elementos inuteis
+
+#cm.printa_matriz(LL);
+
+cpy = LL.copy(); #copia pra fazer a transposta sem bugar o bagulho
 
 
 
 
-m = int(input());
-n = int(input());
+a, b = cm.split_matriz_solucao(LL); #separa o vetor de igualdade
 
-A = cm.entrada_matriz(m, n);
+y = ss(a, b, len(a)); #substituicao sucessiva na matriz inferior
 
-L, U = lu.solve(A);
+LLT = list(map(list, zip(*cpy))); #transposta
+LLT.remove(LLT[-1]); #remove a ultima linha
 
+x = sr(LLT, y, len(LLT)); #substituicao sucessiva na transposta
 
-
-
-
-
-cm.printa_matriz(L);
-cm.printa_matriz(U);
-
-C = cm.multiplica(L, U);
-cm.printa_matriz(C);
-        
+print(x); #vetor resultado

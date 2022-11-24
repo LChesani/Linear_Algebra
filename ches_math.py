@@ -28,10 +28,10 @@ def sub_vet(v1, v2):
     return x;
 
 def printa_matriz(A):
-    print('[');
-    for i in range(0, len(A)):
-        print(A[i]);
-    print(']');
+    for i in range(len(A)):
+        for j in range(len(A[0])):
+            print("[{0:^10}]".format(round(A[i][j], 5)), end='');
+        print('\n');
     
     
 def matriz_identidade(m):
@@ -59,7 +59,7 @@ def gera_matriz(m, n):
         A[l1] = sub_vet(A[l1], A[l2]);
     return A;
 
-def split_matriz_solucao(A):
+def split_matriz_solucao(A): #separa o vetor de igualdade
     b = [x[len(A[0])-1] for x in A];
     
     a = [[0 for _ in range(0, len(A[0])-1)] for _ in range(0, len(A))];
@@ -69,7 +69,7 @@ def split_matriz_solucao(A):
             a[i][j] = A[i][j];
     return a, b;
 
-def multiplica(A, B):
+def multiplica(A, B): #multiplicacao de matrizes
     C = aloca_matriz(len(A), len(B[0]));
     for i in range(0, len(C)):
         for j in range(0, len(C[0])):
